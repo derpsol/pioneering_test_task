@@ -30,6 +30,7 @@ function SideBar() {
         borderTopRightRadius: "16px",
         borderBottomRightRadius: "16px",
         opacity: "0.8",
+        transition: '0.3s ease-in'
       })}
       paddingX="20px"
     >
@@ -52,12 +53,13 @@ function SideBar() {
       >
         {small ? <FaAngleDoubleRight /> : <FaAngleDoubleLeft />}
       </Button>
-      <Box mt="20px">
+      <Box mt="20px" textAlign='center'>
         {menuItems.map((item, index) => {
           return (
             <Button
               sx={(theme) => ({
                 backgroundColor: theme.palette.background.default,
+                minWidth: '0px'
               })}
               key={index}
             >
@@ -75,9 +77,13 @@ function SideBar() {
                 })}
               >
                 <Box mr="8px">{item.icon}</Box>
-                <Typography textTransform="uppercase" fontSize="24px">
-                  {item.name}
-                </Typography>
+                {small ? (
+                  ""
+                ) : (
+                  <Typography textTransform="uppercase" fontSize="24px">
+                    {item.name}
+                  </Typography>
+                )}
               </Link>
             </Button>
           );
