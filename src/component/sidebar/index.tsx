@@ -27,7 +27,7 @@ const menuItems = [
 ];
 
 function SideBar() {
-  const [small, setSmall] = useState(false);
+  const [small, setSmall] = useState(Boolean);
   return (
     <Box
       width={small ? "80px" : "200px"}
