@@ -2,6 +2,7 @@ import {
     Box,
     Typography
 } from '@mui/material';
+import { themes } from '../../theme/CommonStyle';
 
 function Header() {
   return (
@@ -11,7 +12,7 @@ function Header() {
       alignItems='center'
       pl='12px'
       sx={(theme) => ({
-        backgroundColor: theme.palette.background.main,
+        backgroundColor: themes['light'].background.header,
       })}
       boxShadow='2px 4px gray'
     >
@@ -19,7 +20,7 @@ function Header() {
         fontFamily='Arial'
         fontSize='36px'
         sx={(theme) => ({
-          color: theme.palette.text.primary,
+          color: themes['light'].text.header,
         })}
       >
         Pioneering ProgrammersTest App
