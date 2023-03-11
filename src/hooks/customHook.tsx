@@ -1,9 +1,10 @@
+/* eslint-disable */
+
 import { useState } from "react";
 
-export const useVariable = (value: boolean) => {
-    const [theme, setTheme] = useState(true);
-
-    setTheme(value);
+export const useVariable = (flag: boolean) => {
+    const [theme, setTheme] = useState('light');
+    if(flag) {theme == 'light' ? () => {setTheme('dark')} : () => {setTheme('light')}};
 
     return theme;
 }

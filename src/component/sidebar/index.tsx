@@ -12,6 +12,7 @@ import {
   FaAngleDoubleRight,
   FaThumbsUp,
 } from "react-icons/fa";
+import { useVariable } from "../../hooks/customHook";
 
 const menuItems = [
   {
@@ -28,17 +29,19 @@ const menuItems = [
 
 function SideBar() {
   const [small, setSmall] = useState(Boolean);
+  const theme = useVariable(false);
+
   return (
     <Box
       width={small ? "80px" : "200px"}
-      sx={(theme) => ({
-        backgroundColor: themes['light'].background.header,
+      sx={{
+        backgroundColor: theme === 'light' ? themes.light.background.header : themes.dark.background.header,
         height: "calc(100vh - 80px)",
         borderTopRightRadius: "16px",
         borderBottomRightRadius: "16px",
         opacity: "0.8",
         transition: "0.3s ease-in",
-      })}
+      }}
       paddingX="20px"
     >
       <Button
@@ -69,7 +72,7 @@ function SideBar() {
                   <Button
                     variant="contained"
                     sx={{
-                      backgroundColor: themes.light.background.button,
+                      backgroundColor: theme === 'light' ? themes.light.background.button : themes.dark.background.button,
                       minWidth: "0px",
                       mt: "12px",
                       px: "8px",
@@ -84,7 +87,7 @@ function SideBar() {
                         justifyContent: "center",
                         alignItems: "center",
                         fontSize: "24px",
-                        color: themes['light'].text.button,
+                        color: theme === 'light' ? themes.light.text.button : themes.dark.text.button,
                         textDecoration: "none",
                         "&:hover": {
                           cursor: "pointer",
@@ -106,7 +109,7 @@ function SideBar() {
                 <Button
                   variant="contained"
                   sx={{
-                    backgroundColor: themes['light'].background.button,
+                    backgroundColor: theme === 'light' ? themes.light.background.button : themes.dark.background.button,
                     minWidth: "0px",
                     mt: "12px",
                     px: "8px",
@@ -121,7 +124,7 @@ function SideBar() {
                       justifyContent: "center",
                       alignItems: "center",
                       fontSize: "24px",
-                      color: themes['light'].text.button,
+                      color: theme === 'light' ? themes.light.text.button : themes.dark.text.button,
                       textDecoration: "none",
                       "&:hover": {
                         cursor: "pointer",

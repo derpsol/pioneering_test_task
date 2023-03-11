@@ -4,7 +4,6 @@ import {
     Button,
     TextField,
 } from '@mui/material';
-import { useEffect } from 'react';
 
 function FirstPage() {
 
@@ -31,5 +30,3 @@ function FirstPage() {
 }
 
 export default FirstPage;
-
-
