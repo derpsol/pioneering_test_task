@@ -1,4 +1,7 @@
+/* eslint-disable */ 
+
 import { Box, Typography, Button, Link, Tooltip } from "@mui/material";
+import { useState } from "react";
 import {
   FaAngleDoubleLeft,
   FaAngleDoubleRight,
@@ -10,17 +13,32 @@ const menuItems = [
   {
     name: "Page 1",
     icon: <FaThumbsUp />,
-    to: "/#/firstpage",
+    to: "/",
   },
   {
     name: "Page 2",
     icon: <FaThumbsUp />,
-    to: "/#/secondpage",
+    to: "/secondpage",
   },
 ];
 
 function SideBar() {
   const { statusMode, onToggleStatusMode } = useSettingsContext();
+  const [newUrl, setNewUrl] = useState('');
+  const openInNewTab = (to: string) => {
+    window.open(to, '_blank', 'noreferrer');
+  };
+  const openInCurrentTab = (to: string) => {
+    window.open(to, '_self', 'noreferrer');
+  }
+  const handleClick = (e: any, to: string) => {
+    console.log('handle click');
+    if (e.type == 'click') {
+      openInCurrentTab(to);
+    } else if (e.type == 'contextmenu') {
+      openInNewTab(to);
+    }
+  };
 
   return (
     <Box
@@ -72,16 +90,16 @@ function SideBar() {
                       py: "2px",
                     })}
                     key={index}
+                    onClick={(e) => {handleClick(e, item.to); }}
+                    onContextMenu={(e) => {handleClick(e, item.to); }}
                   >
                     <Link
-                      href={item.to}
-                      target="_blank"
                       sx={(theme) => ({
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
                         fontSize: "24px",
-                        color: theme.palette.text.secondary,
+                        color: theme.palette.text.info,
                         textDecoration: "none",
                         "&:hover": {
                           cursor: "pointer",
@@ -100,11 +118,11 @@ function SideBar() {
                     px: "8px",
                     py: "6px",
                   })}
+                  onClick={(e) => {handleClick(e, item.to); }}
+                  onContextMenu={(e) => {handleClick(e, item.to); }}
                   key={index}
                 >
                   <Link
-                    href={item.to}
-                    target="_blank"
                     sx={(theme) => ({
                       display: "flex",
                       justifyContent: "center",

@@ -30,6 +30,7 @@ export default function palette(themeMode: 'light' | 'dark') {
     background: {
       paper: "#808080",
       light: "#cc0000",
+      default: '#cecece',
       neutral: "#cecece",
       dark: "white",
     },
@@ -46,6 +47,7 @@ export default function palette(themeMode: 'light' | 'dark') {
     background: {
       paper: "#c0c0c0",
       light: "#f0f8ff",
+      default: 'white',
       neutral: "white",
       dark: "#008080",
     },

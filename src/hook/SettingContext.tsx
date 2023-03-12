@@ -33,7 +33,6 @@ export function SettingsProvider({ children }: SettingsProviderProps) {
   const onToggleMode = useCallback(() => {
     const themeMode = settings.themeMode === 'light' ? 'dark' : 'light';
     setSettings({ ...settings, themeMode });
-    console.log(themeMode);
   }, [setSettings, settings]);
 
   const onToggleStatusMode = useCallback(() => {

@@ -8,7 +8,6 @@ function FirstPage() {
   const [message, setMessage] = useState("");
   const [count, setCount] = useState(0);
   const { themeMode, onToggleMode } = useSettingsContext();
-  console.log('frontend: ', themeMode);
 
   const buttonStyle = (theme: any) => ({
     bgcolor: theme.palette.background.light,
@@ -18,6 +17,9 @@ function FirstPage() {
     fontSize: "24px",
     mt: "20px",
     border: "1px solid black",
+    '&.Mui-disabled': {
+      color: theme.palette.text.info,
+    },
   })
   
   const toggleModeClicked = () => {
@@ -53,7 +55,7 @@ function FirstPage() {
   };
 
   return (
-    <Box display="flex" width="100%" mt="4px">
+    <Box display="flex" width="100%">
       <Box
         width="60%"
         height="100%"
@@ -92,6 +94,10 @@ function FirstPage() {
               input: {
                 color: theme.palette.text.info,
               },
+              '& .css-p51h6s-MuiInputBase-input-MuiOutlinedInput-input': {
+                border: '1px solid black',
+                borderRadius: '4px',
+              }
             })}
             onChange={(e) => {
               setMessage(e.target.value);
@@ -131,7 +137,7 @@ function FirstPage() {
         border="1px solid black"
         textAlign="center"
         borderColor="black"
-        height="calc(100vh - 84px)"
+        height="calc(100vh - 80px)"
         sx={(theme) => ({
           backgroundColor: theme.palette.background.dark,
         })}
@@ -140,7 +146,6 @@ function FirstPage() {
           <Typography
             color={(theme) => theme.palette.text.success}
             key={index}
-            mt="4px"
           >
             {content}
           </Typography>

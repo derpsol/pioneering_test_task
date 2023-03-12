@@ -19,7 +19,7 @@ function App() {
           <Box display="flex">
             <SideBar />
             <Routes>
-              <Route path="/firstpage" element={<FirstPage />} />
+              <Route path="/" element={<FirstPage />} />
               <Route path="/secondpage" element={<SecondPage />} />
             </Routes>
           </Box>

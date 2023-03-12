@@ -13,7 +13,6 @@ function Header() {
       sx={(theme) => ({
         backgroundColor: theme.palette.background.paper,
       })}
-      boxShadow='2px 4px gray'
     >
       <Typography
         fontFamily='Arial'
