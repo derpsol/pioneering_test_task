@@ -1,38 +1,41 @@
-import { PaletteMode } from "@mui/material";
+import { useMemo } from 'react';
+// @mui
+import { CssBaseline } from '@mui/material';
+import {
+  createTheme,
+  ThemeOptions,
+  StyledEngineProvider,
+  ThemeProvider as MUIThemeProvider,
+} from '@mui/material/styles';
+// components
+import { useSettingsContext } from '../hook/SettingContext';
+//
+import palette from './palette';
 
-const getDesignTokens = (mode: PaletteMode) => ({
-  palette: {
-    mode,
-    ...(mode === "light"
-      ? {
-          background: {
-            main: "#808080",
-            default: "cc0000",
-            paper: "#cecece",
-            transparent: "white",
-          },
-          text: {
-            primary: "#ff0",
-            secondary: "white",
-            third: "#2f4f4f",
-            footer: "#000000",
-          },
-        }
-      : {
-          background: {
-            main: "#c0c0c0",
-            default: "#f0f8ff",
-            paper: "white",
-            transparent: "#008080",
-          },
-          text: {
-            primary: "#2f4f4f",
-            secondary: "#800080",
-            third: "#696969",
-            footer: "white",
-          },
-        }),
-  },
-});
+// ----------------------------------------------------------------------
 
-export default getDesignTokens;
+type Props = {
+  children: React.ReactNode;
+};
+
+export default function ThemeProvider({ children }: Props) {
+  const { themeMode } = useSettingsContext();
+
+  const themeOptions: ThemeOptions = useMemo(
+    () => ({
+      palette: palette(themeMode),
+    }),
+    [themeMode]
+  );
+
+  const theme = createTheme(themeOptions);
+
+  return (
+    <StyledEngineProvider injectFirst>
+      <MUIThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </MUIThemeProvider>
+    </StyledEngineProvider>
+  );
+}

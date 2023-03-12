@@ -1,18 +1,11 @@
 import { useState } from "react";
-import {
-  Box,
-  Typography,
-  Button,
-  Link,
-  Tooltip
-} from "@mui/material";
-import { themes } from "../../theme/CommonStyle";
+import { Box, Typography, Button, Link, Tooltip } from "@mui/material";
 import {
   FaAngleDoubleLeft,
   FaAngleDoubleRight,
   FaThumbsUp,
 } from "react-icons/fa";
-import { useVariable } from "../../hooks/customHook";
+import { useSettingsContext } from "../../hook/SettingContext";
 
 const menuItems = [
   {
@@ -28,20 +21,19 @@ const menuItems = [
 ];
 
 function SideBar() {
-  const [small, setSmall] = useState(Boolean);
-  const theme = useVariable(false);
+  const { statusMode, onToggleStatusMode } = useSettingsContext();
 
   return (
     <Box
-      width={small ? "80px" : "200px"}
-      sx={{
-        backgroundColor: theme === 'light' ? themes.light.background.header : themes.dark.background.header,
+      width={statusMode === "collapse" ? "80px" : "200px"}
+      sx={(theme) => ({
+        backgroundColor: theme.palette.background.paper,
         height: "calc(100vh - 80px)",
         borderTopRightRadius: "16px",
         borderBottomRightRadius: "16px",
         opacity: "0.8",
         transition: "0.3s ease-in",
-      }}
+      })}
       paddingX="20px"
     >
       <Button
@@ -57,88 +49,79 @@ function SideBar() {
           },
           color: "white",
         }}
-        onClick={() => {
-          small ? setSmall(false) : setSmall(true);
-        }}
+        onClick={() => {onToggleStatusMode()}}
       >
-        {small ? <FaAngleDoubleRight /> : <FaAngleDoubleLeft />}
+        {statusMode === "collapse" ? (
+          <FaAngleDoubleRight />
+        ) : (
+          <FaAngleDoubleLeft />
+        )}
       </Button>
       <Box mt="20px" textAlign="center">
         {menuItems.map((item, index) => {
           return (
             <Box>
-              {small ? (
-                <Tooltip title={item.name} placement='top'>
+              {statusMode === "collapse" ? (
+                <Tooltip title={item.name} placement="top">
                   <Button
                     variant="contained"
-                    sx={{
-                      backgroundColor: theme === 'light' ? themes.light.background.button : themes.dark.background.button,
+                    sx={(theme) => ({
+                      backgroundColor: theme.palette.background.light,
                       minWidth: "0px",
                       mt: "12px",
                       px: "8px",
-                      py: small ? "2px" : "6px",
-                    }}
+                      py: "2px",
+                    })}
                     key={index}
                   >
                     <Link
                       href={item.to}
-                      sx={{
+                      target="_blank"
+                      sx={(theme) => ({
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
                         fontSize: "24px",
-                        color: theme === 'light' ? themes.light.text.button : themes.dark.text.button,
+                        color: theme.palette.text.secondary,
                         textDecoration: "none",
                         "&:hover": {
                           cursor: "pointer",
                         },
-                      }}
-                    >
-                      <Box mr={small ? "0px" : "8px"}>{item.icon}</Box>
-                      {small ? (
-                        ""
-                      ) : (
-                        <Typography textTransform="uppercase" fontSize="24px">
-                          {item.name}
-                        </Typography>
-                      )}
-                    </Link>
+                      })}
+                    ><Box mr="8px">{item.icon}</Box></Link>
                   </Button>
                 </Tooltip>
               ) : (
                 <Button
                   variant="contained"
-                  sx={{
-                    backgroundColor: theme === 'light' ? themes.light.background.button : themes.dark.background.button,
+                  sx={(theme) => ({
+                    backgroundColor: theme.palette.background.light,
                     minWidth: "0px",
                     mt: "12px",
                     px: "8px",
-                    py: small ? "2px" : "6px",
-                  }}
+                    py: "6px",
+                  })}
                   key={index}
                 >
                   <Link
                     href={item.to}
-                    sx={{
+                    target="_blank"
+                    sx={(theme) => ({
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
                       fontSize: "24px",
-                      color: theme === 'light' ? themes.light.text.button : themes.dark.text.button,
+                      color: theme.palette.text.info,
                       textDecoration: "none",
                       "&:hover": {
                         cursor: "pointer",
                       },
-                    }}
+                    })}
                   >
-                    <Box mr={small ? "0px" : "8px"}>{item.icon}</Box>
-                    {small ? (
-                      ""
-                    ) : (
-                      <Typography textTransform="uppercase" fontSize="24px">
-                        {item.name}
-                      </Typography>
-                    )}
+                    <Box mr="8px">{item.icon}</Box>
+                    <Typography textTransform="uppercase" fontSize="24px">
+                      {item.name}
+                    </Typography>
                   </Link>
                 </Button>
               )}
