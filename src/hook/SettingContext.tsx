@@ -1,12 +1,7 @@
 import { createContext, useContext, useMemo, useCallback } from 'react';
-// hooks
 import useLocalStorage from './useLocalStorage';
-// utils
-//
 import { defaultSettings } from './config-setting';
 import { SettingsContextProps } from './types';
-
-// ----------------------------------------------------------------------
 
 const initialState: SettingsContextProps = {
   ...defaultSettings,
@@ -34,28 +29,26 @@ type SettingsProviderProps = {
 
 export function SettingsProvider({ children }: SettingsProviderProps) {
   const [settings, setSettings] = useLocalStorage('settings', defaultSettings);
-  const [sideStatus, setSideStatus] = useLocalStorage('sideStatus', defaultSettings);
 
   const onToggleMode = useCallback(() => {
     const themeMode = settings.themeMode === 'light' ? 'dark' : 'light';
     setSettings({ ...settings, themeMode });
+    console.log(themeMode);
   }, [setSettings, settings]);
 
   const onToggleStatusMode = useCallback(() => {
-    const statusMode = sideStatus.statusMode === 'expand' ? 'collapse' : 'expand';
-    setSideStatus({...sideStatus, statusMode});
-  }, [setSideStatus, sideStatus])
+    const statusMode = settings.statusMode === 'expand' ? 'collapse' : 'expand';
+    setSettings({...settings, statusMode});
+  }, [setSettings, settings])
 
   const memoizedValue = useMemo(
     () => ({
       ...settings,
-      ...sideStatus,
       onToggleMode,
       onToggleStatusMode,
     }),
     [
       settings,
-      sideStatus,
       onToggleMode,
       onToggleStatusMode,
     ]

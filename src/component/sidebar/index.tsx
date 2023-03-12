@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Box, Typography, Button, Link, Tooltip } from "@mui/material";
 import {
   FaAngleDoubleLeft,
@@ -60,7 +59,7 @@ function SideBar() {
       <Box mt="20px" textAlign="center">
         {menuItems.map((item, index) => {
           return (
-            <Box>
+            <Box key={index}>
               {statusMode === "collapse" ? (
                 <Tooltip title={item.name} placement="top">
                   <Button

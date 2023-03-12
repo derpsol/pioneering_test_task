@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { Box, Typography, Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { useSettingsContext } from "../../hook/SettingContext";
@@ -10,6 +8,7 @@ function FirstPage() {
   const [message, setMessage] = useState("");
   const [count, setCount] = useState(0);
   const { themeMode, onToggleMode } = useSettingsContext();
+  console.log('frontend: ', themeMode);
 
   const buttonStyle = (theme: any) => ({
     bgcolor: theme.palette.background.light,
@@ -31,7 +30,7 @@ function FirstPage() {
     let hour = new Date().getHours();
 
     let tmpText =
-      themeMode == "light"
+      themeMode === "light"
         ? `${month}/${date}/${year} ${hour}:${minute}:${second} Theme was set to Dark`
         : `${month}/${date}/${year} ${hour}:${minute}:${second} Theme was set to Light`;
     setTextContent([tmpText, ...textContent]);
@@ -72,7 +71,7 @@ function FirstPage() {
             toggleModeClicked();
           }}
         >
-          {themeMode == "light" ? "Set Dark Theme" : "Set Light Theme"}
+          {themeMode === "light" ? "Set Dark Theme" : "Set Light Theme"}
         </Button>
         <Box display="flex" mt="20px">
           <Button
@@ -110,7 +109,7 @@ function FirstPage() {
             Add Button
           </Button>
           {buttonContent.map((content, index) => {
-            if (index == 0) return;
+            if (index === 0) return '';
             return (
               <Button
                 variant="contained"
