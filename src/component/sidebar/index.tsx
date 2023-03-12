@@ -45,7 +45,7 @@ function SideBar() {
       width={statusMode === "collapse" ? "80px" : "200px"}
       sx={(theme) => ({
         backgroundColor: theme.palette.background.paper,
-        height: "calc(100vh - 80px)",
+        minHeight: "calc(100vh - 80px)",
         borderTopRightRadius: "16px",
         borderBottomRightRadius: "16px",
         opacity: "0.8",
@@ -98,7 +98,7 @@ function SideBar() {
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        fontSize: "24px",
+                        fontSize: {xs: '16px', md: "20px"},
                         color: theme.palette.text.info,
                         textDecoration: "none",
                         "&:hover": {
@@ -127,7 +127,7 @@ function SideBar() {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      fontSize: "24px",
+                      fontSize: {xs: '16px', md: "20px"},
                       color: theme.palette.text.info,
                       textDecoration: "none",
                       "&:hover": {
@@ -136,7 +136,12 @@ function SideBar() {
                     })}
                   >
                     <Box mr="8px">{item.icon}</Box>
-                    <Typography textTransform="uppercase" fontSize="24px">
+                    <Typography
+                      textTransform="uppercase"
+                      sx={{
+                        fontSize: {xs: '16px', sm: '20px', md: "24px"},
+                      }}
+                    >
                       {item.name}
                     </Typography>
                   </Link>

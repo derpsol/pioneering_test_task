@@ -16,9 +16,9 @@ function Header() {
     >
       <Typography
         fontFamily='Arial'
-        fontSize='36px'
         sx={(theme) => ({
-          color: theme.palette.text.primary
+          color: theme.palette.text.primary,
+          fontSize: {xs: '24px', sm: '36px', md: '44px'}
         })}
       >
         Pioneering ProgrammersTest App

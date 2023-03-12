@@ -55,15 +55,20 @@ function FirstPage() {
   };
 
   return (
-    <Box display="flex" width="100%">
+    <Box
+      display="flex"
+      width="100%"
+      sx={{
+        flexDirection: { xs: 'column', md: 'row' }
+      }}
+    >
       <Box
-        width="60%"
-        height="100%"
         display="flex"
         alignItems="center"
         flexDirection="column"
         sx={(theme) => ({
           backgroundColor: theme.palette.background.neutral,
+          width: {xs: '100%', md: '60%' }
         })}
       >
         <Button
@@ -75,7 +80,13 @@ function FirstPage() {
         >
           {themeMode === "light" ? "Set Dark Theme" : "Set Light Theme"}
         </Button>
-        <Box display="flex" mt="20px">
+        <Box
+          display="flex"
+          mt="20px"
+          sx={{
+            flexDirection: {xs: 'column', sm: 'row'}
+          }}
+        >
           <Button
             variant="contained"
             sx={buttonStyle}
@@ -132,14 +143,16 @@ function FirstPage() {
         </Box>
       </Box>
       <Box
-        width="40%"
         borderRadius="4px"
         border="1px solid black"
         textAlign="center"
         borderColor="black"
         height="calc(100vh - 80px)"
+        overflow='hidden'
         sx={(theme) => ({
           backgroundColor: theme.palette.background.dark,
+          width: {xs: '100%', md: '40%'},
+          mt: {xs: '20px', md: "0px" },
         })}
       >
         {textContent.map((content, index) => (
